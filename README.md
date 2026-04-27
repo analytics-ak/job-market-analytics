@@ -207,7 +207,7 @@ cd job-market-analytics
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Set up MySQL database
+# 3. Set up a MySQL database
 # Open MySQL Workbench and run:
 # sql/01_create_tables.sql
 # sql/02_create_views.sql
@@ -228,7 +228,7 @@ Update the MySQL credentials in `scripts/load_to_mysql.py` and `run_pipeline.py`
 - 450 listings scraped, 50 duplicates removed via MD5 fingerprint (title + company + location + URL)
 - Salary parsed from raw text — handles $90K, $110K–$140K, £80,000, up to $120K, from €60K
 - Experience level derived from job title keywords — Senior/Lead/Principal/Staff/Director/VP = Senior, Junior/Entry/Graduate/Intern = Junior, everything else = Mid
-- Skills normalised — spelling variants only, distinct technologies preserved (MySQL ≠ PostgreSQL ≠ SQL)
+- Skills normalised — spelling variants only, distinct technologies preserved (MySQL ≠ , PostgreSQL ≠ SQL)
 - Tags treated as skills and role tags combined — not pure technical skills
 
 ---
@@ -244,7 +244,7 @@ job-market-analytics/
 │   └── load_to_mysql.py        ← Loads clean data into MySQL star schema
 │
 ├── sql/
-│   ├── 01_create_tables.sql    ← 6 tables including bridge and audit log
+│   ├── 01_create_tables.sql    ← 6 tables, including bridge and audit log
 │   └── 02_create_views.sql     ← 4 analysis views
 │
 ├── notebooks/
@@ -261,9 +261,13 @@ job-market-analytics/
 │   └── skills_by_experience_level_final.png
 │
 ├── data/
-│   └── sample/                 ← 50-row sample (full raw data gitignored)
+│   ├── clean
+│   ├──  ├── jobs_clean.csv
+│   ├──  └── skills_clean.csv
+│   ├── raw
+│         └── jobs_raw.csv                     
 │
-├── run_pipeline.py             ← Runs all 3 scripts end to end
+├── run_pipeline.py             ← Runs all 3 scripts end-to-end
 ├── requirements.txt
 ├── .gitignore
 └── README.md
